@@ -4,8 +4,10 @@ import pandas as pd
 
 loc = ["47.964718", "7.955852"]
 
+
 d_from_date = datetime.strptime('2017-10-01' , '%Y-%m-%d')
 d_to_date = datetime.strptime('2018-08-10' , '%Y-%m-%d')
+
 
 delta = d_to_date - d_from_date
 latitude = loc[0]
@@ -42,25 +44,39 @@ for i in range(delta.days+1):
 	# print("Summary: " + json_res['daily']['data'][0]['summary'])
 	precip_type = None
 	precip_prob = None
-	if'precipProbability' in json_res['daily']['data'][0] and 'precipType' in json_res['daily']['data'][0] and 'cloudCover' in json_res['daily']['data'][0]:
+	try:
 		precip_type = json_res['daily']['data'][0]['precipType']
+	except:
+		precip_type = -1
+	try:
 		cloud_cover = json_res['daily']['data'][0]['cloudCover']
+	except:
+		cloud_cover = -1
+	try:
 		humidity = json_res['daily']['data'][0]['humidity']
-		visibility = json_res['daily']['data'][0]['visibility']
-		sunrise = json_res['daily']['data'][0]['sunriseTime']
-		sunset = json_res['daily']['data'][0]['sunsetTime']
+	except:
+		humidity = -1
+
+	# visibility = json_res['daily']['data'][0]['visibility']
+	sunrise = json_res['daily']['data'][0]['sunriseTime']
+	sunset = json_res['daily']['data'][0]['sunsetTime']
+	try:
 		precip_prob = json_res['daily']['data'][0]['precipProbability']
+	except:
+		precip_prob = -1
 		# print("Precip type: {}".format(precip_type))
 		# print("cloudCover: {}".format(cloud_cover))
 		# print("humidity: {}".format(humidity))
 		# print("sunrise: {}".format(datetime.fromtimestamp(sunrise).strftime('%Y-%m-%d %H:%M:%S')))
 		# print("sunset: {}".format(datetime.fromtimestamp(sunset).strftime('%Y-%m-%d %H:%M:%S')))
-	if (precip_type == 'rain' and precip_prob != None):
-		# precip_prob *= 100
-		pass
-		# print("Chance of rain: %.2f%" % (precip_prob))
-	else:
-		precip_prob = 0
+
+	# except:
+	# 	precip_type = -1
+	# 	cloud_cover = -1
+	# 	humidity = -1
+	# 	sunrise = -1
+	# 	sunset = -1
+	# 	precip_prob = -1
 	my_df['precip_type'] = precip_type
 	my_df['precip_prob'] = precip_prob
 	my_df['cloud_cover'] = cloud_cover

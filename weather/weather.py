@@ -89,6 +89,19 @@ for i in range(delta.days+1):
 	df = df.append(my_df)
 
 df = df.reset_index(drop=True)
+df = df.drop(columns=['0'])
+
+# calculate sun uptime in seconds
+def getSunTime(sunrise, sunset):
+	sunset = datetime.strptime(sunset, '%Y-%m-%d %H:%M:%S')
+	sunrise = datetime.strptime(sunrise, '%Y-%m-%d %H:%M:%S')
+	# print(sunset, sunrise)
+	sun_time = (sunset - sunrise).seconds 
+	# print(sun_time)
+	# sys.exit()
+	return sun_time
+	
+df['sun_time'] = df.apply(lambda x: getSunTime(x['sunrise'], x['sunset']), axis=1)
 df.to_csv('/home/kh41/02_SolarAnlage/weather.csv')
 
 

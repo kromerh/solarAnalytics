@@ -50,7 +50,7 @@ db = client.solarAnlage
 vzlogger = db.vzlogger
 
 data = read_vzlogger(vzlogger)
-print(data)
+print(type(data))
 
 df = pd.DataFrame(data, index=None)
 

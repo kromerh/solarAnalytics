@@ -26,7 +26,9 @@ def read_vzlogger(collection):
 		item = res[ii]
 		_ = re.findall(r'ObisIdentifier:1-0:(.*)\*255', item)
 		if len(_) > 0:
-			print(_[0], res[ii+1])
+			ID = _[0]
+			val = float(re.findall(r'value=(.*)', res[ii+1]))
+			print(ID, val)
 
 	# add to dictionary
 

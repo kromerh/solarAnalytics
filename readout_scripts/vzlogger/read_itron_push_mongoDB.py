@@ -51,9 +51,8 @@ db = client.solarAnlage
 vzlogger = db.vzlogger
 
 data = read_vzlogger(vzlogger)
-print(data)
 
-df = pd.DataFrame.from_dict(data)
+df = pd.DataFrame.from_dict(data, index=[0])
 
 # Bulk inserting documents. Each row in the DataFrame will be a document in Mongo
 vzlogger.insert_many(df.to_dict('records'))

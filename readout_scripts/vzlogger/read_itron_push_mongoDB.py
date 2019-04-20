@@ -15,7 +15,7 @@ def read_vzlogger(collection):
 	out = {'time': time, '180': 0, '280': 0}
 
 	# start vzlogger script
-	cmd = 'vzlogger'
+	cmd = '/usr/local/bin/vzlogger'
 	res = subprocess.run([cmd], stdout=subprocess.PIPE).stdout.decode('utf-8')
 	res = res.split(' ')
 

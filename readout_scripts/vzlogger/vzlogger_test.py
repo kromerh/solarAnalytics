@@ -21,16 +21,21 @@ def read_vzlogger(collection):
 	res = subprocess.run([cmd], stdout=subprocess.PIPE).stdout.decode('utf-8')
 	res = res.split(' ')
 
-	# capture the relevant output
+	# capture the relevant output and add to dictionary
 	for ii in range(0,len(res)):
 		item = res[ii]
 		_ = re.findall(r'ObisIdentifier:1-0:(.*)\*255', item)
 		if len(_) > 0:
-			ID = _[0]
-			val = float(re.findall(r'value=(.*)', res[ii+1])[0])
-			print(ID, val)
+			ID = _[0] # OBIS Identifier
+			val = float(re.findall(r'value=(.*)', res[ii+1])[0])  # value in Wh
+			assert len(val) > 0
+			assert ID in ['1.8.0', '2.8.0']
+			if ID == '1.8.0':
+				out['1-8-0'] = val
+			if ID == '2.8.0':
+				out['2-8-0'] = val
 
-	# add to dictionary
+	print(out)
 
 	# return
 	# return res

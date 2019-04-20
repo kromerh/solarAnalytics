@@ -38,10 +38,12 @@ def read_vzlogger(collection):
 			# print(item, res[ii+1])  # print the line and value raw
 
 	out['time'] = time
-	print(out)
+
 
 	# return
 	# return res
 	return out
 
-read_vzlogger('test')
+data = read_vzlogger('test')
+
+print(data)

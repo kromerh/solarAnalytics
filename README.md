@@ -4,6 +4,23 @@
 
 2.) Predict total output based on historical performance of the sysem
 
+## Installation of vzlogger
+
+- Buy smartmeter readout (IR), i.e. this one Weidmann Elektronik Stromzähler, Smart Meter IR (Infrarot) Schreib/Lesekopf USB (Optokopf) https://www.amazon.de/gp/product/B01B8N0ASY/ref=ppx_yo_dt_b_asin_title_o08_s00?ie=UTF8&psc=1
+- Install it onto the current reader, connect it to RPi3
+- Follow instructions to install vzlogger on volkszaehler.org
+	- Check if the readout is found by the RPi ` ls -l /dev/serial/{by-path,by-id}/*`
+	- Install vzlogger from https://github.com/volkszaehler/vzlogger
+		- To install, follow the detailed installation instructions at http://wiki.volkszaehler.org/software/controller/vzlogger/installation_cpp-version
+			If you're impatient you can quickstart using (Debian Wheezy):
+
+			`sudo apt-get install build-essential git-core cmake pkg-config subversion libcurl3-dev libgnutls-dev libsasl2-dev uuid-dev uuid-runtime libtool dh-autoreconf libunistring-dev`
+
+			For Debian Jessie be sure to add:
+
+			`sudo apt-get install libgcrypt20-dev`
+
+	- Create the configuration for vzlogger as in `/readout_scripts/vzlogger/vzlogger.conf`
 
 ## Installation of MongoDB on RPi3 with Python3
 

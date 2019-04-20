@@ -1,7 +1,44 @@
-from pymongo import MongoClient
 import pandas as pd
-import numpy as np
-import datetime
+import subprocess
+from pymongo import MongoClient
+import re
+
+# read the vzlogger
+def read_vzlogger(collection):
+	# collection: collection to use to store the document
+	# return: dictionary with time, OBIS identifiers 1.8.0, 2.8.0, and respective values
+
+	# initialize output dictionary
+	out = {'time': 0, '1-8-0': 0, '2-8-0': 0}
+
+	# get current time
+	time = pd.Timestamp.now()
+
+	# start vzlogger script
+	cmd = 'vzlogger'
+	res = subprocess.run([cmd], stdout=subprocess.PIPE).stdout.decode('utf-8')
+	res = res.split(' ')
+
+	# capture the relevant output and add to dictionary
+	for ii in range(0,len(res)):
+		item = res[ii]
+		_ = re.findall(r'ObisIdentifier:1-0:(.*)\*255', item)
+		if len(_) > 0:
+			ID = _[0] # OBIS Identifier
+			val = re.findall(r'value=(.*)', res[ii+1])[0]  # value in Wh
+			assert len(val) > 0
+			val = float(val)
+			assert ID in ['1.8.0', '2.8.0']
+			if ID == '1.8.0':
+				out['1-8-0'] = val
+			if ID == '2.8.0':
+				out['2-8-0'] = val
+			# print(item, res[ii+1])  # print the line and value raw
+
+	out['time'] = time
+
+	# return
+	return out
 
 # Choose the appropriate client
 client = MongoClient()
@@ -12,11 +49,8 @@ db = client.solarAnlage
 # Use the collection vzlogger
 vzlogger = db.vzlogger
 
-# ====== Inserting Documents ====== #
-# Creating a simple Pandas DataFrame
-time = pd.Timestamp.now()
-data = {'time': time,
-       'in': np.random.random(1)*1000}
+data = read_vzlogger(vzlogger)
+
 df = pd.DataFrame(data)
 
 # Bulk inserting documents. Each row in the DataFrame will be a document in Mongo

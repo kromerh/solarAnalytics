@@ -35,7 +35,7 @@ def read_vzlogger(collection):
 				out['1-8-0'] = val
 			if ID == '2.8.0':
 				out['2-8-0'] = val
-			print(_)
+			print(item, res[ii+1])  # print the line and value raw
 	print(out)
 
 	# return

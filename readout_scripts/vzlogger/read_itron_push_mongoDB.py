@@ -52,7 +52,7 @@ vzlogger = db.vzlogger
 data = read_vzlogger(vzlogger)
 print(data)
 
-df = pd.DataFrame(data, index=0)
+df = pd.DataFrame(data, index=None)
 
 # Bulk inserting documents. Each row in the DataFrame will be a document in Mongo
 vzlogger.insert_many(df.to_dict('records'))

@@ -32,3 +32,8 @@
 
 - Install python packages `pip3 install pymongo==3.4.0 pandas numpy`
 
+- Put the readout script `read_itron_push_mongoDB.py` into `/home/pi/Documents/myvzlogger/`
+
+- Edit the crontab via `crontab -e` and add the line
+	`*/5 * * * * /usr/bin/python3 /home/pi/Documents/myvzlogger/read_itron_push_mongoDB.py`
+

@@ -24,7 +24,7 @@ def read_vzlogger(collection):
 	# capture the relevant output
 	for ii in range(0,len(res)):
 		item = res[ii]
-		_ = re.findall(r'ObisIdentifier:1-0:(.*)*255', item)
+		_ = re.findall(r'ObisIdentifier:1-0:(.*)\*255', item)
 		if len(_) > 0:
 			print(_[0], res[ii+1])
 

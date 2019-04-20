@@ -20,8 +20,13 @@ def read_vzlogger(collection):
 	cmd = 'vzlogger'
 	res = subprocess.run([cmd], stdout=subprocess.PIPE).stdout.decode('utf-8')
 	res = res.split(' ')
+
 	# capture the relevant output
-	print(res)
+	for ii in range(0,len(res)):
+		item = res[ii]
+		_ = re.findall(r'ObisIdentifier:1-0:(.*)*255', item)
+		if len(_) > 0:
+			print(item, res[ii+1])
 
 	# add to dictionary
 

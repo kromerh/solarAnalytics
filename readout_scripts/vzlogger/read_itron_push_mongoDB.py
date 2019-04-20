@@ -8,11 +8,11 @@ def read_vzlogger(collection):
 	# collection: collection to use to store the document
 	# return: dictionary with time, OBIS identifiers 1.8.0, 2.8.0, and respective values
 
-	# initialize output dictionary
-	out = {'time': 0, '1-8-0': 0, '2-8-0': 0}
-
 	# get current time
 	time = pd.Timestamp.now()
+
+	# initialize output dictionary
+	out = {'time': time, '180': 0, '280': 0}
 
 	# start vzlogger script
 	cmd = 'vzlogger'
@@ -31,12 +31,12 @@ def read_vzlogger(collection):
 
 			assert ID in ['1.8.0', '2.8.0']
 			if ID == '1.8.0':
-				out['1-8-0'] = val
+				out['180'] = val
 			if ID == '2.8.0':
-				out['2-8-0'] = val
+				out['280'] = val
 			# print(item, res[ii+1])  # print the line and value raw
 
-	out['time'] = time
+
 
 	# return
 	return out

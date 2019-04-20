@@ -19,10 +19,9 @@ def read_vzlogger(collection):
 	# start vzlogger script
 	cmd = 'vzlogger'
 	res = subprocess.run([cmd], stdout=subprocess.PIPE).stdout.decode('utf-8')
-
+	res = res.split(' ')
 	# capture the relevant output
-	for r in res:
-		print(r)
+	print(res)
 
 	# add to dictionary
 

@@ -27,8 +27,9 @@ def read_vzlogger(collection):
 		_ = re.findall(r'ObisIdentifier:1-0:(.*)\*255', item)
 		if len(_) > 0:
 			ID = _[0] # OBIS Identifier
-			val = float(re.findall(r'value=(.*)', res[ii+1])[0])  # value in Wh
+			val = re.findall(r'value=(.*)', res[ii+1])[0]  # value in Wh
 			assert len(val) > 0
+			val = float(val)
 			assert ID in ['1.8.0', '2.8.0']
 			if ID == '1.8.0':
 				out['1-8-0'] = val

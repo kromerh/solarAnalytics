@@ -22,6 +22,7 @@
 
 	- Create the configuration for vzlogger as in `/readout_scripts/vzlogger/vzlogger.conf`
 
+
 ## Installation of MongoDB on RPi3 with Python3
 
 - Install the packages with `sudo apt-get install mongodb`
@@ -29,5 +30,5 @@
 - Start mongodb service using `sudo systemctl start mongodb.service`
 - Check that it is also running with a restart of the system (do the same for the vzlogger!)
 
-- Install python packages `pip3 install pymongo`
+- Install python packages `pip3 install pymongo==3.4.0 pandas numpy`
 

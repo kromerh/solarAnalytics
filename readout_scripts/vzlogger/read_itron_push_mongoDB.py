@@ -28,6 +28,7 @@ def read_vzlogger(collection):
 			val = re.findall(r'value=(.*)', res[ii+1])[0]  # value in Wh
 			assert len(val) > 0
 			val = float(val)
+
 			assert ID in ['1.8.0', '2.8.0']
 			if ID == '1.8.0':
 				out['1-8-0'] = val
@@ -50,9 +51,9 @@ db = client.solarAnlage
 vzlogger = db.vzlogger
 
 data = read_vzlogger(vzlogger)
-print(type(data))
+print(data)
 
-df = pd.DataFrame(data, index=None)
+df = pd.DataFrame.from_dict(data)
 
 # Bulk inserting documents. Each row in the DataFrame will be a document in Mongo
 vzlogger.insert_many(df.to_dict('records'))

@@ -21,7 +21,7 @@
 			`sudo apt-get install libgcrypt20-dev`
 
 	- Create the configuration for vzlogger as in `/readout_scripts/vzlogger/vzlogger.conf`
-
+	- Start vzlogger with  vzlogger -c CONFIGURATIONFILE
 
 ## Installation of MongoDB on RPi3 with Python3
 
@@ -31,4 +31,9 @@
 - Check that it is also running with a restart of the system (do the same for the vzlogger!)
 
 - Install python packages `pip3 install pymongo==3.4.0 pandas numpy`
+
+- Put the readout script `read_itron_push_mongoDB.py` into `/home/pi/Documents/myvzlogger/`
+
+- Edit the crontab via `crontab -e` and add the line
+	`*/5 * * * * /usr/bin/python3 /home/pi/Documents/myvzlogger/read_itron_push_mongoDB.py`
 

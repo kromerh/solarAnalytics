@@ -21,7 +21,7 @@ documents = vzlogger.find()
 data = pd.DataFrame(list(documents))
 print(data)
 
-ts = data.iloc[-1,'time']
+ts = data['time'].values[-1]
 time_string = str(ts.dt.year)+'-'+str(ts.dt.month)+'-'+str(ts.dt.day)
 
 data.to_csv(time_string+'latest_vzlogger_reading.csv')

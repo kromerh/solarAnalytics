@@ -22,6 +22,6 @@ data = pd.DataFrame(list(documents))
 print(data)
 
 ts = data['time'].values[-1]
-time_string = str(ts.dt.year)+'-'+str(ts.dt.month)+'-'+str(ts.dt.day)
+time_string = str(ts.year)+'-'+str(ts.month)+'-'+str(ts.day)
 
 data.to_csv(time_string+'latest_vzlogger_reading.csv')

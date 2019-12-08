@@ -17,6 +17,6 @@ vzlogger = db.vzlogger
 
 
 # ====== Finding Documents ====== #
-documents = coll.find()
+documents = vzlogger.find()
 data = pd.DataFrame(list(documents))
 print(data)

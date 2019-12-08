@@ -6,11 +6,11 @@ import re
 # Choose the appropriate client
 client = MongoClient()
 
-# Connect to the db paulisasnake
-db = client.paulisasnake
+# Connect to the db solarAnlage
+db = client.solarAnlage
 
-# Use the collection temp and humid
-coll = db.temp_and_humid
+# Use the collection vzlogger
+vzlogger = db.vzlogger
 
 # Bulk inserting documents. Each row in the DataFrame will be a document in Mongo
 # coll.insert_many(data.to_dict('records'))

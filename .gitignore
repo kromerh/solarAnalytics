@@ -1,2 +1,4 @@
 ./data/*
 .credentials*
+**/01.Original_data/**
+*.pw
